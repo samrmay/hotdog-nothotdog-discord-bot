@@ -1,0 +1,6 @@
+torch
+discord
+asyncio
+PIL
+requests
+torchvision
