@@ -162,12 +162,12 @@ class Resnet(ImageClassificationBase):
 @torch.no_grad()
 def predict_image(xb, model_path):
     model = to_device(Resnet(3, 2), device)
-    model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
+    model.load_state_dict(torch.load(
+        model_path, map_location=torch.device('cpu')))
     xb = xb.convert('RGB')
     xb = tfms(xb).unsqueeze(0)
     xb = to_device(xb, device)
     # IMportant to include model.eval()
     model.eval()
     yb = model.pred_img(xb)
-    print(yb)
     return torch.max(yb, dim=1)[1]

@@ -44,18 +44,15 @@ async def hotdog_cmd(ctx):
         elif message.content.startswith('https://cdn.discordapp.com/attachments/'):
             src = message.content
             break
-    print(src)
     r = requests.get(src, stream=True, timeout=10)
     with open(f"temp/temp_pic.png", 'wb') as output:
         output.write(r.content)
     img = Image.open('temp/temp_pic.png')
-    print(img)
     prob = predict_image(img, MODEL_PATH)
     try:
         os.remove('temp/temp_pic.png')
     except:
         print("Error, temporary picture was already removed or never existed")
-    print(prob)
     if prob == 1:
         await ctx.send('\U0001F32D\U0000200D\U0000274C')
     else:
