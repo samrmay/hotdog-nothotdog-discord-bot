@@ -5,6 +5,7 @@ from discord.ext import commands
 import asyncio
 from dotenv import load_dotenv
 from PIL import Image
+from hot_nothotdog_pred import predict_image
 
 load_dotenv()
 # Permissions num: 75776
