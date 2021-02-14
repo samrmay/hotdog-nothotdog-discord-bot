@@ -1,0 +1,1 @@
+## Hotdog or not hotdog discord bot
