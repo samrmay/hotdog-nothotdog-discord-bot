@@ -1,6 +1,6 @@
 torch
 discord
 asyncio
-PIL
+Pillow
 requests
 torchvision
