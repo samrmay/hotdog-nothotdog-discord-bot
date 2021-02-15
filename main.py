@@ -1,5 +1,4 @@
 import os
-import time
 import discord
 from discord.ext import commands
 import asyncio
@@ -13,6 +12,11 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 MODEL_PATH = os.getenv('MODEL_PATH')
 bot = commands.Bot(command_prefix='!')
+
+try:
+    os.mkdir('temp')
+except FileExistsError:
+    pass
 
 
 @bot.event
