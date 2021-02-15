@@ -11,28 +11,18 @@ from hot_nothotdog_pred import predict_image
 load_dotenv()
 # Permissions num: 75776
 TOKEN = os.getenv('DISCORD_TOKEN')
-GUILD = os.getenv('DISCORD_GUILD')
 MODEL_PATH = os.getenv('MODEL_PATH')
 bot = commands.Bot(command_prefix='!')
 
 
-def is_welcome(message):
-    return message.content == f"{message.author.display_name} has entered the chat" and message.author.bot
-
-
 @bot.event
 async def on_ready():
-    # Cycle through guilds, find the one matching that of .env variable
-    guild = discord.utils.get(bot.guilds, name=GUILD)
+    guilds = bot.guilds
     print(
-        f'{bot.user.name} is connected to the following guild:\n'
-        f'{guild.name}(id: {guild.id})')
-    for channel in guild.text_channels:
-        await channel.purge(limit=100, check=is_welcome)
-        await channel.send(f"{bot.user.name} has entered the chat", delete_after=120)
-    # Print members of guild that bot has jsut connected to
-    members = '\n - '.join([member.name for member in guild.members])
-    print(f'Guild Members:\n - {members}')
+        f'Connected to the following guilds:\n{[(x.name, x.id) for x in guilds]}')
+    for guild in guilds:
+        for channel in guild.text_channels:
+            await channel.send(f"{bot.user.name} has entered the chat", delete_after=120)
 
 
 @bot.command(name="hotdog")
