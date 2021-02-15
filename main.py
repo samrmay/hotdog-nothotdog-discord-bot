@@ -29,7 +29,7 @@ async def on_ready():
             await channel.send(f"{bot.user.name} has entered the chat", delete_after=120)
 
 
-@bot.command(name="hotdog")
+@bot.command(name="hotdog", help="Tells you if most recent image in channel is a hotdog or a not hotdog.")
 async def hotdog_cmd(ctx):
     async for message in ctx.channel.history(limit=200):
         if (message.attachments != None and message.attachments != []):
