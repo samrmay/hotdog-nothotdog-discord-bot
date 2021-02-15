@@ -5,7 +5,7 @@ from discord.ext import commands
 import asyncio
 from dotenv import load_dotenv
 from PIL import Image
-import requests
+from requests import get
 from hot_nothotdog_pred import predict_image
 
 load_dotenv()
@@ -34,7 +34,7 @@ async def hotdog_cmd(ctx):
         elif message.content.startswith('https://cdn.discordapp.com/attachments/'):
             src = message.content
             break
-    r = requests.get(src, stream=True, timeout=10)
+    r = get(src, stream=True, timeout=10)
     with open(f"temp/temp_pic.png", 'wb') as output:
         output.write(r.content)
     img = Image.open('temp/temp_pic.png')
